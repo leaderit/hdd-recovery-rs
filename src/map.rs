@@ -119,7 +119,9 @@ mod tests {
     #[test]
     fn test_map() {
 
-        let mut map = Map::new("test.map", 512 * 8 );
+        let test_file: &str = "test.map";
+
+        let mut map = Map::new( test_file, 512 * 8 );
 
         assert_eq!( map.size, 512 * 8 );
         assert_eq!( map.buf.len(), 1024 );
@@ -150,6 +152,7 @@ mod tests {
         assert_eq!( map.get( 35 ), 1 );        
         map.read();
         assert_eq!( map.get( 28 ), 1 );
-        assert_eq!( map.get( 35 ), 2 );        
+        assert_eq!( map.get( 35 ), 2 );
+        std::fs::remove_file(test_file).unwrap();       
     }
 }
